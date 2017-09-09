@@ -160,6 +160,18 @@ app.get('/bloggs/:id',function(req, res) {
 app.put('/bloggs/:id/edit',function(req, res) {
 
 	var update = req.body;
+	
+		//updating author information array
+		var authorInfo = {Id: req.body.authorId,Name:req.body.authorFullName,url:req.body.authorUrl,imageUrl:req.body.image};
+		update.authorInfo = authorInfo;
+
+		// updating replies information array
+		var replies = {totalItems: req.body.items,selfLink:req.body.link};
+		update.replies = replies;
+
+		var update = req.body;
+		var today = Date.now();
+		update.updated = today; //updated time and date
 
 	bloggModel.findOneAndUpdate({'_id':req.params.id},update,function(err,result){
 

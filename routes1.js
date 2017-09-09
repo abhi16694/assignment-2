@@ -134,7 +134,6 @@ app.get('/bloggs/:id',function(req, res) {
 		//lets set the date of creation
 		var today = Date.now();
 		newBlogg.published = today;
-		newBlogg.updated = today;
 
 		//Saving the file 
 		newBlogg.save(function(error){
@@ -162,6 +161,8 @@ app.get('/bloggs/:id',function(req, res) {
 app.put('/bloggs/:id/edit',function(req, res) {
 
 	var update = req.body;
+	var today = Date.now();
+	update.updated = today; //update time and date
 
 	bloggModel.findOneAndUpdate({'_id':req.params.id},update,function(err,result){
 
